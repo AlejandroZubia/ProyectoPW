@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Galería y Formulario</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .galeria img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .galeria img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Galería y Formulario</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="biografia1.html">Biografía Parte 1</a></li>
+          <li><a href="biografia2.html">Biografía Parte 2</a></li>
+          <li><a href="GaleriayFormulario.html">Galería y Formulario</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <section>
+      <h2>¿Quién eres tú?</h2>
+      <form id="formulario">
+        <label for="frioCalor">¿Frío o calor?</label><br>
+        <input type="text" id="frioCalor" name="frioCalor"><br><br>
+
+        <label for="heroeVillano">¿Héroe o villano?</label><br>
+        <input type="text" id="heroeVillano" name="heroeVillano"><br><br>
+
+        <label for="navidadHalloween">¿Navidad o Halloween?</label><br>
+        <input type="text" id="navidadHalloween" name="navidadHalloween"><br><br>
+
+        <button type="submit">Guardar</button>
+      </form>
+
+      <h3>Respuestas guardadas:</h3>
+      <div id="datosGuardados"></div>
+    </section>
+
+    <section>
+      <h2>Galería de trabajos</h2>
+      <div class="galeria">
+        <img src="Imagenes/trabajo1.jpg" alt="Trabajo 1">
+        <img src="Imagenes/trabajo2.jpg" alt="Trabajo 2">
+        <img src="Imagenes/trabajo3.jpg" alt="Trabajo 3">
+        <img src="Imagenes/trabajo4.jpg" alt="Trabajo 4">
+        <img src="Imagenes/trabajo5.jpg" alt="Trabajo 5">
+        <img src="Imagenes/trabajo6.jpg" alt="Trabajo 6">
+        <img src="Imagenes/trabajo7.jpg" alt="Trabajo 7">
+        <img src="Imagenes/trabajo8.jpg" alt="Trabajo 8">
+        <img src="Imagenes/trabajo9.jpg" alt="Trabajo 9">
+        <img src="Imagenes/trabajo10.jpg" alt="Trabajo 10">
+      </div>
+    </section>
+
+    <footer>
+      Desarrollado por Alejandro Barquiel Zubia - Matrícula: 22190510
+    </footer>
+  </div>
+
+  <script>
+    const form = document.getElementById('formulario');
+    const datosGuardados = document.getElementById('datosGuardados');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const frioCalor = document.getElementById('frioCalor').value;
+      const heroeVillano = document.getElementById('heroeVillano').value;
+      const navidadHalloween = document.getElementById('navidadHalloween').value;
+
+      localStorage.setItem('frioCalor', frioCalor);
+      localStorage.setItem('heroeVillano', heroeVillano);
+      localStorage.setItem('navidadHalloween', navidadHalloween);
+
+      mostrarDatos();
+    });
+
+    function mostrarDatos() {
+      const frioCalor = localStorage.getItem('frioCalor') || '';
+      const heroeVillano = localStorage.getItem('heroeVillano') || '';
+      const navidadHalloween = localStorage.getItem('navidadHalloween') || '';
+
+      datosGuardados.innerHTML = `
+        <p>¿Frío o calor?: ${frioCalor}</p>
+        <p>¿Héroe o villano?: ${heroeVillano}</p>
+        <p>¿Navidad o Halloween?: ${navidadHalloween}</p>
+      `;
+    }
+
+    mostrarDatos();
+  </script>
+</body>
+</html>
